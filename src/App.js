@@ -18,6 +18,16 @@ import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Main from "./components/layout/Main";
+
+import StudentList from "./pages/students/StudentList";
+import AddStudent from "./pages/students/AddStudent";
+
+import InstructorsList from "./pages/instructors/InstructorsList";
+import AddInstructor from "./pages/instructors/AddInstructor";
+
+import ClassList from "./pages/classes/ClassList";
+import AddClass from "./pages/classes/AddClass";
+
 import "antd/dist/antd.css";
 import "./assets/styles/main.css";
 import "./assets/styles/responsive.css";
@@ -32,10 +42,16 @@ function App() {
           <Route exact path="/dashboard" component={Home} />
           <Route exact path="/tables" component={Tables} />
           <Route exact path="/billing" component={Billing} />
-          <Route exact path="/rtl" component={Rtl} />
           <Route exact path="/profile" component={Profile} />
 
-          <Route exact path="/classes" component={Profile} />
+          <Route exact path="/classes" component={ClassList} />
+          <Route exact path="/add-class" component={AddClass} />
+
+          <Route exact path="/students" component={StudentList} />
+          <Route exact path="/add-student" component={AddStudent} />
+
+          <Route exact path="/instructors" component={InstructorsList} />
+          <Route exact path="/add-instructor" component={AddInstructor} />
 
           <Redirect from="*" to="/dashboard" />
         </Main>
