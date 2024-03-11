@@ -8,7 +8,6 @@ const AddInstructor = () => {
   return (
     <div>
       <Card>
-      
       <h2 className='mb-4'>Add Instructor</h2>
 
         <div className='row'>
