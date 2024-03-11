@@ -68,6 +68,15 @@ const AddClass = () => {
           </div>
 
           <div className='col-md-6'>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Amount</Form.Label>
+              <Form.Control type="text" placeholder="Enter Amount" />
+            </Form.Group>
+          </Form>
+          </div>
+
+          <div className='col-md-12'>
           <Button className='mx-2' variant="secondary">Cancel</Button>
           <Button variant="primary">Submit</Button>
           </div>
