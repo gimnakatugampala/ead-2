@@ -26,6 +26,7 @@ import InstructorsList from "./pages/instructors/InstructorsList";
 import AddInstructor from "./pages/instructors/AddInstructor";
 
 import ClassList from "./pages/classes/ClassList";
+import MyClasses from "./pages/classes/MyClasses";
 import AddClass from "./pages/classes/AddClass";
 
 import PaymentList from "./pages/students/PaymentList";
@@ -47,6 +48,7 @@ function App() {
           <Route exact path="/profile" component={Profile} />
 
           <Route exact path="/classes" component={ClassList} />
+          <Route exact path="/my-classes" component={MyClasses} />
           <Route exact path="/add-class" component={AddClass} />
 
           <Route exact path="/students" component={StudentList} />
@@ -56,6 +58,7 @@ function App() {
           <Route exact path="/add-instructor" component={AddInstructor} />
 
           <Route exact path="/payments" component={PaymentList} />
+
 
           <Redirect from="*" to="/dashboard" />
         </Main>
