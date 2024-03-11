@@ -25,6 +25,7 @@ import AddStudent from "./pages/students/AddStudent";
 import InstructorsList from "./pages/instructors/InstructorsList";
 import AddInstructor from "./pages/instructors/AddInstructor";
 
+import AllClass from "./pages/classes/AllClass";
 import ClassList from "./pages/classes/ClassList";
 import MyClasses from "./pages/classes/MyClasses";
 import AddClass from "./pages/classes/AddClass";
@@ -47,6 +48,7 @@ function App() {
           <Route exact path="/billing" component={Billing} />
           <Route exact path="/profile" component={Profile} />
 
+          <Route exact path="/" component={AllClass} />
           <Route exact path="/classes" component={ClassList} />
           <Route exact path="/my-classes" component={MyClasses} />
           <Route exact path="/add-class" component={AddClass} />
@@ -60,7 +62,7 @@ function App() {
           <Route exact path="/payments" component={PaymentList} />
 
 
-          <Redirect from="*" to="/dashboard" />
+          {/* <Redirect from="*" to="/dashboard" /> */}
         </Main>
       </Switch>
     </div>
