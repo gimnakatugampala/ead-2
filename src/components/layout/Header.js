@@ -1,14 +1,4 @@
-/*!
-  =========================================================
-  * Muse Ant Design Dashboard - v1.0.0
-  =========================================================
-  * Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-  * Copyright 2021 Creative Tim (https://www.creative-tim.com)
-  * Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-  * Coded by Creative Tim
-  =========================================================
-  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+
 
 import { useState, useEffect } from "react";
 
@@ -37,6 +27,15 @@ import {
 import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 import avtar from "../../assets/images/team-2.jpg";
+
+import { DownOutlined, SmileOutlined } from '@ant-design/icons';
+import { Space } from 'antd';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 const ButtonContainer = styled.div`
   .ant-btn-primary {
@@ -262,8 +261,22 @@ function Header({
 
   const [visible, setVisible] = useState(false);
   const [sidenavType, setSidenavType] = useState("transparent");
+  const [cartItems, setCartItems] = useState([]);
+
 
   useEffect(() => window.scrollTo(0, 0));
+
+
+  useEffect(() => {
+      // if(window.location.pathname.includes('/')){
+          const storedCoupons = reactLocalStorage.get('ead_class');
+          if (storedCoupons !== null) {
+              setCartItems(storedCoupons != null ? JSON.parse(storedCoupons) : []);
+          }
+      // }
+      
+  }, [cartItems]); 
+  
 
   const showDrawer = () => setVisible(true);
   const hideDrawer = () => setVisible(false);
@@ -277,7 +290,7 @@ function Header({
         <Col span={24} md={6}>
           <Breadcrumb>
             <Breadcrumb.Item>
-              <NavLink to="/">Pages</NavLink>
+              <NavLink to="/">Home</NavLink>
             </Breadcrumb.Item>
             <Breadcrumb.Item style={{ textTransform: "capitalize" }}>
               {name.replace("/", "")}
@@ -294,7 +307,12 @@ function Header({
         </Col>
         <Col span={24} md={18} className="header-control">
 
-          <Badge size="small" count={4}>
+        <Link to="/sign-in" className="btn-sign-in">
+            <LogoutIcon />
+            <span>Logout</span>
+          </Link>
+
+          {/* <Badge size="small" count={4}>
             <Dropdown overlay={menu} trigger={["click"]}>
               <a
                 href="#pablo"
@@ -304,11 +322,41 @@ function Header({
                 {bell}
               </a>
             </Dropdown>
-          </Badge>
+          </Badge> */}
+
+          {/* Cart */}
+          <Navbar variant="light" bg="light" expand="lg">
+          <Navbar.Toggle aria-controls="navbar-dark-example" />
+            <Navbar.Collapse id="navbar-dark-example">
+
+            <Badge size="small" count={cartItems.length}>
+              <a href="/checkout"> 
+                <ShoppingCartIcon />
+              </a>
+            </Badge>
+
+              <Nav>
+                <NavDropdown
+                  id="nav-dropdown-dark-example"
+                  title=""
+                  menuVariant="light"
+                >
+
+                  {cartItems.map((classItem, index) => (
+                  <NavDropdown.Item key={index} href="#"><img width={50} src={classItem.img} /> {classItem.class_name}</NavDropdown.Item>
+                  ))}
+
           
-          <Button type="link" onClick={showDrawer}>
+                </NavDropdown>
+              </Nav>
+
+            </Navbar.Collapse>
+          </Navbar>
+          
+          {/* <Button type="link" onClick={showDrawer}>
             {logsetting}
-          </Button>
+          </Button> */}
+          
           <Button
             type="link"
             className="sidebar-toggler"
@@ -316,122 +364,11 @@ function Header({
           >
             {toggler}
           </Button>
-          <Drawer
-            className="settings-drawer"
-            mask={true}
-            width={360}
-            onClose={hideDrawer}
-            placement={placement}
-            visible={visible}
-          >
-            <div layout="vertical">
-              <div className="header-top">
-                <Title level={4}>
-                  Configurator
-                  <Text className="subtitle">See our dashboard options.</Text>
-                </Title>
-              </div>
 
-              <div className="sidebar-color">
-                <Title level={5}>Sidebar Color</Title>
-                <div className="theme-color mb-2">
-                  <ButtonContainer>
-                    <Button
-                      type="primary"
-                      onClick={() => handleSidenavColor("#1890ff")}
-                    >
-                      1
-                    </Button>
-                    <Button
-                      type="success"
-                      onClick={() => handleSidenavColor("#52c41a")}
-                    >
-                      1
-                    </Button>
-                    <Button
-                      type="danger"
-                      onClick={() => handleSidenavColor("#d9363e")}
-                    >
-                      1
-                    </Button>
-                    <Button
-                      type="yellow"
-                      onClick={() => handleSidenavColor("#fadb14")}
-                    >
-                      1
-                    </Button>
 
-                    <Button
-                      type="black"
-                      onClick={() => handleSidenavColor("#111")}
-                    >
-                      1
-                    </Button>
-                  </ButtonContainer>
-                </div>
+          
 
-                <div className="sidebarnav-color mb-2">
-                  <Title level={5}>Sidenav Type</Title>
-                  <Text>Choose between 2 different sidenav types.</Text>
-                  <ButtonContainer className="trans">
-                    <Button
-                      type={sidenavType === "transparent" ? "primary" : "white"}
-                      onClick={() => {
-                        handleSidenavType("transparent");
-                        setSidenavType("transparent");
-                      }}
-                    >
-                      TRANSPARENT
-                    </Button>
-                    <Button
-                      type={sidenavType === "white" ? "primary" : "white"}
-                      onClick={() => {
-                        handleSidenavType("#fff");
-                        setSidenavType("white");
-                      }}
-                    >
-                      WHITE
-                    </Button>
-                  </ButtonContainer>
-                </div>
-                <div className="fixed-nav mb-2">
-                  <Title level={5}>Navbar Fixed </Title>
-                  <Switch onChange={(e) => handleFixedNavbar(e)} />
-                </div>
-                <div className="ant-docment">
-                  <ButtonContainer>
-                    <Button type="black" size="large">
-                      FREE DOWNLOAD
-                    </Button>
-                    <Button size="large">VIEW DOCUMENTATION</Button>
-                  </ButtonContainer>
-                </div>
-                <div className="viewstar">
-                  <a href="#pablo">{<StarOutlined />} Star</a>
-                  <a href="#pablo"> 190</a>
-                </div>
-
-                <div className="ant-thank">
-                  <Title level={5} className="mb-2">
-                    Thank you for sharing!
-                  </Title>
-                  <ButtonContainer className="social">
-                    <Button type="black">{<TwitterOutlined />}TWEET</Button>
-                    <Button type="black">{<FacebookFilled />}SHARE</Button>
-                  </ButtonContainer>
-                </div>
-              </div>
-            </div>
-          </Drawer>
-          <Link to="/sign-in" className="btn-sign-in">
-            {profile}
-            <span>Sign in</span>
-          </Link>
-          <Input
-            className="header-search"
-            placeholder="Type here..."
-            prefix={<SearchOutlined />}
-          />
+   
         </Col>
       </Row>
     </>

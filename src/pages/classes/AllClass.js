@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Avatar, Card } from 'antd';
 import Button from 'react-bootstrap/Button';
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
+import {reactLocalStorage} from 'reactjs-localstorage';
 import './styles.css';
+import SuccessAlert from '../../common/SuccessAlert';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import ErrorAlert from '../../common/ErrorAlert';
 
 const { Meta } = Card;
 
@@ -41,38 +43,54 @@ const classes = [
 ];
 
 const AllClass = () => {
+   
     const [cartItems, setCartItems] = useState([]);
+
+    useEffect(() => {
+        // if(window.location.pathname.includes('/checkout')){
+            const storedCoupons = reactLocalStorage.get('ead_class');
+            if (storedCoupons !== null) {
+                setCartItems(storedCoupons != null ? JSON.parse(storedCoupons) : []);
+            }
+        // }
+        
+    }, [cartItems]); // Empty dependency array to run the effect only once on component mount
+
 
     const handleAddToCart = (classItem) => {
 
-        // const Toast = Swal.mixin({
-        //     toast: true,
-        //     position: "top-end",
-        //     showConfirmButton: false,
-        //     timer: 3000,
-        //     timerProgressBar: true,
-        //     didOpen: (toast) => {
-        //       toast.onmouseenter = Swal.stopTimer;
-        //       toast.onmouseleave = Swal.resumeTimer;
-        //     }
-        //   });
-        //   Toast.fire({
-        //     icon: "success",
-        //     title: "Added To Cart"
-        //   });
+       SuccessAlert("Added To Cart")
 
         // Update cart items
         setCartItems([...cartItems, classItem]);
         // LS Add Cart
-        localStorage.setItem("ead_class", JSON.stringify(classItem));
+        localStorage.setItem("ead_class", JSON.stringify([...cartItems, classItem]));
     }
 
+
+    const handleDeleteFromCart = (classItem) => {
+
+        ErrorAlert("Removed From Cart");
+    
+        // Filter out the classItem from cartItems
+        const updatedCartItems = cartItems.filter(item => item.id != classItem.id);
+        
+        // Update cart items
+        setCartItems(updatedCartItems);
+        
+        // Optionally, you can remove the item from local storage as well
+        localStorage.setItem("ead_class", JSON.stringify(updatedCartItems));
+    }
+    
+
     const isItemInCart = (classItem) => {
-        return cartItems.some(item => item.id === classItem.id);
+        return cartItems.some(item => item.id == classItem.id);
     }
 
     return (
+
         <div className='row'>
+            <NotificationContainer/>
             {classes.map((classItem, index) => (
                 <div key={index} className='col-md-4 my-2'>
                     <Card
@@ -100,7 +118,7 @@ const AllClass = () => {
 
                         <div className='d-flex justify-content-center'>
                             {isItemInCart(classItem) ? (
-                                <Button size="sm" variant="danger">Added to Cart</Button>
+                                <Button onClick={(e) => handleDeleteFromCart(classItem)}  size="sm" variant="danger">Added to Cart</Button>
                             ) : (
                                 <Button onClick={(e) => handleAddToCart(classItem)} size="sm" variant="primary">Add To Cart</Button>
                             )}
@@ -110,6 +128,8 @@ const AllClass = () => {
                 </div>
             ))}
         </div>
+
+
     );
 }
 
