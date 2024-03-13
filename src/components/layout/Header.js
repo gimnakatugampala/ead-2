@@ -293,6 +293,7 @@ function Header({
           </div>
         </Col>
         <Col span={24} md={18} className="header-control">
+
           <Badge size="small" count={4}>
             <Dropdown overlay={menu} trigger={["click"]}>
               <a
@@ -304,6 +305,7 @@ function Header({
               </a>
             </Dropdown>
           </Badge>
+          
           <Button type="link" onClick={showDrawer}>
             {logsetting}
           </Button>
