@@ -76,6 +76,17 @@ const AddClass = () => {
           </Form>
           </div>
 
+
+          <div className='col-md-6'>
+          <Form.Label>Select Day</Form.Label>
+          <Form.Select aria-label="Default select example">
+          <option>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </Form.Select>
+          </div>
+
           <div className='col-md-12'>
           <Button className='mx-2' variant="secondary">Cancel</Button>
           <Button variant="primary">Submit</Button>

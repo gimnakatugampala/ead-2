@@ -1,10 +1,35 @@
 import React from 'react'
 import MaterialTable from 'material-table';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 
 const StudentList = () => {
   return (
     <div>
+
+    <Form className='d-flex'>
+          <div className="mb-3 mx-3">
+            <Form.Check type={"radio"} id={`check-api-${"radio"}`}>
+              <Form.Check.Input type={"radio"} isValid />
+              <Form.Check.Label>{`All`}</Form.Check.Label>
+            </Form.Check>
+          </div>
+          <div className="mb-3 mx-3">
+            <Form.Check type={"radio"} id={`check-api-${"radio"}`}>
+              <Form.Check.Input type={"radio"} isValid />
+              <Form.Check.Label>{`Not Paid`}</Form.Check.Label>
+            </Form.Check>
+          </div>
+          <div className="mb-3 mx-3">
+            <Form.Check type={"radio"} id={`check-api-${"radio"}`}>
+              <Form.Check.Input type={"radio"} isValid />
+              <Form.Check.Label>{`Paid`}</Form.Check.Label>
+            </Form.Check>
+          </div>
+       
+      </Form>
+
         <MaterialTable
       title="Students"
       columns={[

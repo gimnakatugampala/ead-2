@@ -36,7 +36,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {reactLocalStorage} from 'reactjs-localstorage';
-
+import './styles.css'
 const ButtonContainer = styled.div`
   .ant-btn-primary {
     background-color: #1890ff;
@@ -283,10 +283,9 @@ function Header({
 
   return (
     <>
-      {/* <div className="setting-drwer" onClick={showDrawer}>
-        {setting}
-      </div> */}
+ 
       <Row gutter={[24, 0]}>
+
         <Col span={24} md={6}>
           <Breadcrumb>
             <Breadcrumb.Item>
@@ -305,27 +304,9 @@ function Header({
             </span>
           </div>
         </Col>
-        <Col span={24} md={18} className="header-control">
 
-        <Link to="/sign-in" className="btn-sign-in">
-            <LogoutIcon />
-            <span>Logout</span>
-          </Link>
-
-          {/* <Badge size="small" count={4}>
-            <Dropdown overlay={menu} trigger={["click"]}>
-              <a
-                href="#pablo"
-                className="ant-dropdown-link"
-                onClick={(e) => e.preventDefault()}
-              >
-                {bell}
-              </a>
-            </Dropdown>
-          </Badge> */}
-
-          {/* Cart */}
-          <Navbar variant="light" bg="light" expand="lg">
+        <Col span={24} md={15} className="header-control">
+        <Navbar variant="light" bg="light" expand="lg">
           <Navbar.Toggle aria-controls="navbar-dark-example" />
             <Navbar.Collapse id="navbar-dark-example">
 
@@ -337,14 +318,17 @@ function Header({
 
               <Nav>
                 <NavDropdown
+                
                   id="nav-dropdown-dark-example"
                   title=""
                   menuVariant="light"
                 >
 
                   {cartItems.map((classItem, index) => (
-                  <NavDropdown.Item key={index} href="#"><img width={50} src={classItem.img} /> {classItem.class_name}</NavDropdown.Item>
+                  <NavDropdown.Item key={index} href="#"><img width={50} src={classItem.img} /> <b>{classItem.class_name}</b> </NavDropdown.Item>
                   ))}
+                  {cartItems.length > 0 && <a className="btn btn-primary btn-sm m-2" href="/checkout">Checkout</a>}
+                  
 
           
                 </NavDropdown>
@@ -352,11 +336,18 @@ function Header({
 
             </Navbar.Collapse>
           </Navbar>
-          
-          {/* <Button type="link" onClick={showDrawer}>
-            {logsetting}
-          </Button> */}
-          
+        </Col>
+
+        <Col span={24} md={3} className="header-control">
+
+        
+
+        <Link to="/sign-in" className="btn-sign-in">
+            <LogoutIcon />
+            <span>Logout</span>
+          </Link>
+
+         
           <Button
             type="link"
             className="sidebar-toggler"
@@ -366,9 +357,7 @@ function Header({
           </Button>
 
 
-          
-
-   
+      
         </Col>
       </Row>
     </>
