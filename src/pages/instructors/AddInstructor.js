@@ -49,6 +49,15 @@ const AddInstructor = () => {
           </div>
 
           <div className='col-md-6'>
+          <Form>
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Image</Form.Label>
+            <Form.Control type="file" />
+          </Form.Group>
+          </Form>
+          </div>
+
+          <div className='col-md-12'>
           <Button className='mx-2' variant="secondary">Cancel</Button>
           <Button variant="primary">Submit</Button>
           </div>

@@ -31,6 +31,7 @@ import MyClasses from "./pages/classes/MyClasses";
 import AddClass from "./pages/classes/AddClass";
 
 import PaymentList from "./pages/students/PaymentList";
+import Checkout from "./pages/checkout/Checkout";
 
 import "antd/dist/antd.css";
 import "./assets/styles/main.css";
@@ -60,6 +61,8 @@ function App() {
           <Route exact path="/add-instructor" component={AddInstructor} />
 
           <Route exact path="/payments" component={PaymentList} />
+
+          <Route exact path="/checkout" component={Checkout} />
 
 
           {/* <Redirect from="*" to="/dashboard" /> */}

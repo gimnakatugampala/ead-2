@@ -275,7 +275,7 @@ function Header({
           }
       // }
       
-  }, [cartItems]); 
+  }, []); 
   
 
   const showDrawer = () => setVisible(true);

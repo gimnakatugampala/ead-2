@@ -1,34 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { PlusOutlined } from '@ant-design/icons'
+import { Radio } from 'antd';
+import { Select } from 'antd';
+import { Input, Space , Badge , Image ,Col, Divider, Row } from 'antd';
+import { Card } from 'antd';
+import { Button, Progress } from 'antd';
 import MaterialTable from 'material-table';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+const { Search } = Input;
 
 
 const StudentList = () => {
+
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
+
+  const onSearch = (value) => console.log(value);
+
   return (
     <div>
 
-    <Form className='d-flex'>
-          <div className="mb-3 mx-3">
-            <Form.Check type={"radio"} id={`check-api-${"radio"}`}>
-              <Form.Check.Input type={"radio"} isValid />
-              <Form.Check.Label>{`All`}</Form.Check.Label>
-            </Form.Check>
-          </div>
-          <div className="mb-3 mx-3">
-            <Form.Check type={"radio"} id={`check-api-${"radio"}`}>
-              <Form.Check.Input type={"radio"} isValid />
-              <Form.Check.Label>{`Not Paid`}</Form.Check.Label>
-            </Form.Check>
-          </div>
-          <div className="mb-3 mx-3">
-            <Form.Check type={"radio"} id={`check-api-${"radio"}`}>
-              <Form.Check.Input type={"radio"} isValid />
-              <Form.Check.Label>{`Paid`}</Form.Check.Label>
-            </Form.Check>
-          </div>
-       
-      </Form>
+  <Space className='my-3' size="middle">
+    <Radio.Group  defaultValue="a" buttonStyle="solid">
+      <Radio.Button value="a">All</Radio.Button>
+      <Radio.Button value="b">Paid</Radio.Button>
+      <Radio.Button value="c">Not Paid</Radio.Button>
+      
+    </Radio.Group>
+
+    <Space size={90}>
+    <Search placeholder="Search Students" onSearch={onSearch} enterButton />
+    </Space>
+
+    </Space>
 
         <MaterialTable
       title="Students"
