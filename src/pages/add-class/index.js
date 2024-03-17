@@ -23,7 +23,6 @@ import { styled } from '@mui/material/styles'
 
 // ** Third Party Imports
 import DatePicker from 'react-datepicker'
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
@@ -195,17 +194,17 @@ const AddClass = () => {
 
           <Grid item xs={12} sm={6}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={['TimePicker']}>
+              
                 <TimePicker label="Start Date" />
-              </DemoContainer>
+             
             </LocalizationProvider>
           </Grid>
 
           <Grid item xs={12} sm={6}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={['TimePicker']}>
+             
                 <TimePicker label="End Date" />
-              </DemoContainer>
+             
             </LocalizationProvider>
           </Grid>
 

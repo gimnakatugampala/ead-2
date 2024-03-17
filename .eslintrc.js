@@ -5,7 +5,7 @@ module.exports = {
     browser: true
   },
   parser: 'babel-eslint',
-  extends: ['next/core-web-vitals', 'prettier'],
+  extends: ['next/core-web-vitals', 'prettier','next'],
   parserOptions: {
     ecmaVersion: 11,
     sourceType: 'module',
@@ -23,6 +23,8 @@ module.exports = {
     '@next/next/no-img-element': 'off',
     'react/no-unescaped-entities': 'off',
     'import/no-anonymous-default-export': 'off',
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
 
     // add new line above comment
     'lines-around-comment': [
