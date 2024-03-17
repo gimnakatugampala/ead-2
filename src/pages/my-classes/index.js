@@ -9,7 +9,7 @@ const MyClasses = () => {
     <div>
       <Grid item xs={12}>
         <Card>
-          <CardHeader title='Sticky Header' titleTypographyProps={{ variant: 'h6' }} />
+          <CardHeader title='My Classes' titleTypographyProps={{ variant: 'h6' }} />
           <TableStickyHeader />
         </Card>
       </Grid>
