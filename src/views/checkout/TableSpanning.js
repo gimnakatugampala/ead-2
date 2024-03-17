@@ -14,6 +14,8 @@ import { useEffect , useState } from 'react'
 import {reactLocalStorage} from 'reactjs-localstorage';
 import { Button } from '@mui/material'
 import { loadStripe } from '@stripe/stripe-js';
+import SuccessAlert from '../common/SuccessAlert';
+import { NotificationContainer } from 'react-notifications';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -54,17 +56,7 @@ const subtotal = (cartItems) => {
   return cartItems.map(({ amount }) => amount).reduce((amount, i) => amount + i, 0)
 }
 
-React.useEffect(() => {
-  // Check to see if this is a redirect back from Checkout
-  const query = new URLSearchParams(window.location.search);
-  if (query.get('success')) {
-    console.log('Order placed! You will receive an email confirmation.');
-  }
 
-  if (query.get('canceled')) {
-    console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
-  }
-}, []);
 
 
 const newPricing = cartItems != null && cartItems.map((item) => ({

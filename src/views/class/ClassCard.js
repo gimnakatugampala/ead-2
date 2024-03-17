@@ -75,7 +75,9 @@ const ClassCard = ({classN}) => {
 
           
         <Typography variant='body2' sx={{display: 'flex', alignItems: 'center' ,justifyContent:'justify-content-between' }}>
-         <p>Start Time : <b>{classN.start_time}</b></p> &nbsp; &nbsp; <p>End Time : <b>{classN.end_time}</b></p>
+        <Box sx={{ marginBottom: 2, marginTop:2, display: 'flex', alignItems: 'center' }}>
+         <span>Start Time : <b>{classN.start_time}</b></span> &nbsp; &nbsp; <span>End Time : <span><b>{classN.end_time}</b></span></span>
+         </Box>
         </Typography>
 
         <Typography sx={{display: 'flex', alignItems: 'center' ,justifyContent:'center' }} variant='body3' >

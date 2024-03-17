@@ -2,6 +2,9 @@ import React from 'react'
 import Grid from '@mui/material/Grid'
 import ClassCard from 'src/views/class/ClassCard'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { useEffect } from 'react';
+import SuccessAlert from 'src/views/common/SuccessAlert';
+import ErrorAlert from 'src/views/common/ErrorAlert';
 
 const classes = [
   {
@@ -40,6 +43,24 @@ const classes = [
 ];
 
 const AllClasses = () => {
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    
+    if (query.get('success')) {
+      console.log('Order placed! You will receive an email confirmation.');
+      SuccessAlert("Payment Completed");
+      localStorage.setItem("ead_class", JSON.stringify([]));
+    }
+  
+    if (query.get('canceled')) {
+      console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
+      ErrorAlert("Payment Canceled");
+    }
+  }, []);
+
   return (
     <Grid container spacing={6}>
 
