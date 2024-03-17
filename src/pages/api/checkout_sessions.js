@@ -4,22 +4,12 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
       // Create Checkout Sessions from body params.
+      const cartClasses = JSON.parse(req.body.cartClasses);
+
+
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
-        line_items: [
-          {
-            price_data: {
-              currency:`LKR`,
-              product_data:{
-                images: [`https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png`],
-                name: "PHYSISCS"
-              },
-              unit_amount: 45000.00,
-            },
-            description: `lorem`,
-            quantity: 1,
-          },
-        ],
+        line_items: cartClasses,
         mode: 'payment',
         success_url: `${req.headers.origin}/?success=true`,
         cancel_url: `${req.headers.origin}/?canceled=true`,

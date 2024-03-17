@@ -67,6 +67,22 @@ React.useEffect(() => {
 }, []);
 
 
+const newPricing = cartItems != null && cartItems.map((item) => ({
+  price_data: {
+    currency: 'LKR',
+    product_data: {
+      images: [`${item.img}`],
+      name: item.class_name
+    },
+    unit_amount: Number.parseInt(item.amount),
+  },
+  description: `${item.class_name} Class Conducted By ${item.instructor} On ${item.day} From ${item.start_time} - ${item.end_time}`,
+  quantity: 1,
+}));
+
+
+
+
 
   return (
     <TableContainer component={Paper}>
@@ -105,8 +121,9 @@ React.useEffect(() => {
 
           <TableCell colSpan={2}>
           <form action="/api/checkout_sessions" method="POST">
+          <input type="hidden" name="cartClasses" value={JSON.stringify(newPricing)} />
           <Button type="submit" fullWidth variant='contained'>
-            Checkout
+           <span style={{color:'#fff'}}>PAY NOW</span>
           </Button>
             </form>
 
