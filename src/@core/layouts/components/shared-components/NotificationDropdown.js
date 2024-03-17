@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState, Fragment } from 'react'
+import { useState, Fragment, useEffect } from 'react'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
@@ -13,7 +13,7 @@ import MuiAvatar from '@mui/material/Avatar'
 import MuiMenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
 import Badge from '@mui/material/Badge';
-
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 // ** Icons Imports
 import CartOutline from 'mdi-material-ui/Cart'
@@ -84,6 +84,7 @@ const MenuItemSubtitle = styled(Typography)({
 const NotificationDropdown = () => {
   // ** States
   const [anchorEl, setAnchorEl] = useState(null)
+  const [cartItems, setCartItems] = useState([]);
 
   // ** Hook
   const hidden = useMediaQuery(theme => theme.breakpoints.down('lg'))
@@ -106,10 +107,20 @@ const NotificationDropdown = () => {
     }
   }
 
+  useEffect(() => {
+    // if(window.location.pathname.includes('/')){
+        const storedCoupons = reactLocalStorage.get('ead_class');
+        if (storedCoupons !== null) {
+            setCartItems(storedCoupons != null ? JSON.parse(storedCoupons) : []);
+        }
+    // }
+    
+}, [cartItems]); 
+
   return (
     <Fragment>
       <IconButton color='inherit' aria-haspopup='true' onClick={handleDropdownOpen} aria-controls='customized-menu'>
-      <Badge badgeContent={4} color="primary">
+      <Badge badgeContent={cartItems.length} color="primary">
         <CartOutline />
       </Badge>
       </IconButton>
