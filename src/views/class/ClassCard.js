@@ -16,14 +16,14 @@ const ClassCard = ({classN}) => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-      // if(window.location.pathname.includes('/checkout')){
-          const storedCoupons = reactLocalStorage.get('ead_class');
-          if (storedCoupons !== null) {
-              setCartItems(storedCoupons != null ? JSON.parse(storedCoupons) : []);
-          }
-      // }
+    setInterval(() => {
+      const storedCoupons = reactLocalStorage.get('ead_class');
+      if (storedCoupons !== null) {
+          setCartItems(storedCoupons != null ? JSON.parse(storedCoupons) : []);
+      }
+    },2000)
       
-  }, [cartItems]); // Empty dependency array to run the effect only once on component mount
+  }, []); // Empty dependency array to run the effect only once on component mount
 
 
   const handleAddToCart = (classN) => {
